@@ -49,12 +49,17 @@
         <template x-for="(lesson, index) in lessons" :key="lesson.id">
             <li class="lesson-card content-center aspect-square border bg-red-300"
                 :class="{ 'bg-red-300': isSelected(index)}" @click="toggleSelected(index)">
-                <h3 id="lesson-title" x-text="lesson.title" class="font-bold text-4xl text-center">
+                <h3 id="lesson-title" x-text="lesson.id" class="font-bold text-4xl text-center">
                 </h3>
             </li>
         </template>
     </ul>
+
+    <button @click="copyResourcesToClipboard()">Copy resources</button>
 </div>
+
+
+
 
 <h2 class="mt-4 text-2xl text-center">Sssh, we're only testing!</h2>
 
@@ -68,31 +73,82 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('tflessons', () => ({
             lessons: [
-                { id: 1, title: '1', description: 'Description for lesson 1' },
-                { id: 2, title: '2', description: 'Description for lesson 2' },
-                { id: 3, title: '3', description: 'Description for lesson 2' },
-                { id: 4, title: '4', description: 'Description for lesson 2' },
-                { id: 5, title: '5', description: 'Description for lesson 2' },
-                { id: 6, title: '6', description: 'Description for lesson 2' },
-                { id: 7, title: '7', description: 'Description for lesson 2' },
-                { id: 8, title: '8', description: 'Description for lesson 2' },
-                { id: 9, title: '9', description: 'Description for lesson 2' },
-                { id: 10, title: '10', description: 'Description for lesson 2' },
-                { id: 11, title: '11', description: 'Description for lesson 2' },
-                { id: 12, title: '12', description: 'Description for lesson 2' },
-                { id: 13, title: '13', description: 'Description for lesson 2' },
-                { id: 14, title: '14', description: 'Description for lesson 2' },
-                { id: 15, title: '15', description: 'Description for lesson 2' },
-                { id: 16, title: '16', description: 'Description for lesson 2' },
-                { id: 17, title: '17', description: 'Description for lesson 2' },
-                { id: 18, title: '18', description: 'Description for lesson 2' },
-                { id: 19, title: '19', description: 'Description for lesson 2' },
-                { id: 20, title: '20', description: 'Description for lesson 2' },
-                { id: 21, title: '21', description: 'Description for lesson 2' },
-                { id: 22, title: '22', description: 'Description for lesson 2' },
-                { id: 23, title: '23', description: 'Description for lesson 2' },
-                { id: 24, title: '24', description: 'Description for lesson 2' },
-                { id: 25, title: '25', description: 'Description for lesson 2' },
+                {
+                    id: 1, title: `Don't submit "fun" talk ideas to conferences`, description: `
+I don't know what to say about this. Are you really interested in this lesson?` },
+                {
+                    id: 2, title: 'Public speaking tips', description: `
+There's some great public speaking resources:
+* [On Ross's site](https://rosswintle.uk/public-speaking)` },
+                {
+                    id: 3, title: '3', description: `
+Description for lesson 3` },
+                {
+                    id: 4, title: '4', description: `
+Description for lesson 4` },
+                {
+                    id: 5, title: '5', description: `
+Description for lesson 5` },
+                {
+                    id: 6, title: '6', description: `
+Description for lesson 6` },
+                {
+                    id: 7, title: '7', description: `
+Description for lesson 7` },
+                {
+                    id: 8, title: '8', description: `
+Description for lesson 8` },
+                {
+                    id: 9, title: '9', description: `
+Description for lesson 9` },
+                {
+                    id: 10, title: '10', description: `
+Description for lesson 10` },
+                {
+                    id: 11, title: '11', description: `
+Description for lesson 11` },
+                {
+                    id: 12, title: '12', description: `
+Description for lesson 12` },
+                {
+                    id: 13, title: '13', description: `
+Description for lesson 13` },
+                {
+                    id: 14, title: '14', description: `
+Description for lesson 14` },
+                {
+                    id: 15, title: '15', description: `
+Description for lesson 15` },
+                {
+                    id: 16, title: '16', description: `
+Description for lesson 16` },
+                {
+                    id: 17, title: '17', description: `
+Description for lesson 17` },
+                {
+                    id: 18, title: '18', description: `
+Description for lesson 18` },
+                {
+                    id: 19, title: '19', description: `
+Description for lesson 19` },
+                {
+                    id: 20, title: '20', description: `
+Description for lesson 20` },
+                {
+                    id: 21, title: '21', description: `
+Description for lesson 21` },
+                {
+                    id: 22, title: '22', description: `
+Description for lesson 22` },
+                {
+                    id: 23, title: '23', description: `
+Description for lesson 23` },
+                {
+                    id: 24, title: '24', description: `
+Description for lesson 24` },
+                {
+                    id: 25, title: '25', description: `
+Description for lesson 25` },
             ],
 
             // These will be array indexes starting at 1.
@@ -104,17 +160,38 @@
             },
 
             toggleSelected(index) {
-                console.log(`toggling ${index}`)
                 if (this.selected.has(index)) {
                     this.selected.delete(index);
                 } else {
                     this.selected.set(index, true);
                 }
+            },
+
+            compileResources() {
+                let resourceText = `
+# 25 Lessons - LoopConf 2025 - Ross Wintle
+
+These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
+`;
+                for (const lessonIndex of this.selected.keys()) {
+                    const lesson = this.lessons[lessonIndex];
+                    resourceText += `\n\n---\n\n## Lesson ${lesson.id} - ${lesson.title}\n`
+                    resourceText += lesson.description;
+                }
+
+                return resourceText;
+            },
+
+            copyResourcesToClipboard() {
+                const resourceText = this.compileResources();
+                this.$clipboard(resourceText);
             }
         }))
     })
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js"
+    defer></script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- Live watch script -->

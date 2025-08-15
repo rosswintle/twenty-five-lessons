@@ -17,12 +17,17 @@
         <template x-for="(lesson, index) in lessons" :key="lesson.id">
             <li class="lesson-card content-center aspect-square border bg-red-300"
                 :class="{ 'bg-red-300': isSelected(index)}" @click="toggleSelected(index)">
-                <h3 id="lesson-title" x-text="lesson.title" class="font-bold text-4xl text-center">
+                <h3 id="lesson-title" x-text="lesson.id" class="font-bold text-4xl text-center">
                 </h3>
             </li>
         </template>
     </ul>
+
+    <button @click="copyResourcesToClipboard()">Copy resources</button>
 </div>
+
+
+
 
 <?php if (ENVIRONMENT === 'DEVELOPMENT') : ?>
 <h2 class="mt-4 text-2xl text-center">Sssh, we're only testing!</h2>
