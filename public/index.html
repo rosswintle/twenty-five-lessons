@@ -152,18 +152,18 @@ Description for lesson 25` },
             ],
 
             // These will be array indexes starting at 1.
-            selected: new Map(),
+            selected: Alpine.$persist([]),
 
             // Index is the array index, not the ID.
             isSelected(index) {
-                return this.selected.has(index)
+                return this.selected.includes(index)
             },
 
             toggleSelected(index) {
-                if (this.selected.has(index)) {
-                    this.selected.delete(index);
+                if (this.selected.includes(index)) {
+                    this.selected.splice(this.selected.indexOf(index), 1);
                 } else {
-                    this.selected.set(index, true);
+                    this.selected.push(index);
                 }
             },
 
@@ -173,7 +173,11 @@ Description for lesson 25` },
 
 These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
 `;
-                for (const lessonIndex of this.selected.keys()) {
+                // This sorts the array in place.
+                this.selected.sort((a, b) => a - b);
+                // This is kinda painful because we're using an array not a map.
+                for (const selectedLessonIndex in this.selected) {
+                    const lessonIndex = this.selected[selectedLessonIndex];
                     const lesson = this.lessons[lessonIndex];
                     resourceText += `\n\n---\n\n## Lesson ${lesson.id} - ${lesson.title}\n`
                     resourceText += lesson.description;
@@ -190,8 +194,12 @@ These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
     })
 </script>
 
+<!-- Alpine Plugins -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js"
     defer></script>
+
+<!-- Alpine Core -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- Live watch script -->
