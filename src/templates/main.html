@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php includePart('../parts/head.html', ['title' => $title]) ?>
+
+
+<body>
+    <?php includePart('../parts/header.html'); ?>
+
+    <main class="container max-w-(--breakpoint-lg) mx-auto px-8 py-8 border border-slate-200">
+        <?= $content ?>
+    </main>
+
+    <?php includePart('../parts/footer.html') ?>
+</body>
+
+</html>
