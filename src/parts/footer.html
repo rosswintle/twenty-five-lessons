@@ -1,6 +1,58 @@
 <footer class="w-full px-8 py-4 bg-slate-200">
 </footer>
 
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('tflessons', () => ({
+            lessons: [
+                { id: 1, title: '1', description: 'Description for lesson 1' },
+                { id: 2, title: '2', description: 'Description for lesson 2' },
+                { id: 3, title: '3', description: 'Description for lesson 2' },
+                { id: 4, title: '4', description: 'Description for lesson 2' },
+                { id: 5, title: '5', description: 'Description for lesson 2' },
+                { id: 6, title: '6', description: 'Description for lesson 2' },
+                { id: 7, title: '7', description: 'Description for lesson 2' },
+                { id: 8, title: '8', description: 'Description for lesson 2' },
+                { id: 9, title: '9', description: 'Description for lesson 2' },
+                { id: 10, title: '10', description: 'Description for lesson 2' },
+                { id: 11, title: '11', description: 'Description for lesson 2' },
+                { id: 12, title: '12', description: 'Description for lesson 2' },
+                { id: 13, title: '13', description: 'Description for lesson 2' },
+                { id: 14, title: '14', description: 'Description for lesson 2' },
+                { id: 15, title: '15', description: 'Description for lesson 2' },
+                { id: 16, title: '16', description: 'Description for lesson 2' },
+                { id: 17, title: '17', description: 'Description for lesson 2' },
+                { id: 18, title: '18', description: 'Description for lesson 2' },
+                { id: 19, title: '19', description: 'Description for lesson 2' },
+                { id: 20, title: '20', description: 'Description for lesson 2' },
+                { id: 21, title: '21', description: 'Description for lesson 2' },
+                { id: 22, title: '22', description: 'Description for lesson 2' },
+                { id: 23, title: '23', description: 'Description for lesson 2' },
+                { id: 24, title: '24', description: 'Description for lesson 2' },
+                { id: 25, title: '25', description: 'Description for lesson 2' },
+            ],
+
+            // These will be array indexes starting at 1.
+            selected: new Map(),
+
+            // Index is the array index, not the ID.
+            isSelected(index) {
+                return this.selected.has(index)
+            },
+
+            toggleSelected(index) {
+                console.log(`toggling ${index}`)
+                if (this.selected.has(index)) {
+                    this.selected.delete(index);
+                } else {
+                    this.selected.set(index, true);
+                }
+            }
+        }))
+    })
+</script>
+
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- Live watch script -->

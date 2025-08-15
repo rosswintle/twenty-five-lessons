@@ -54,7 +54,7 @@ class Live {
          *
          * @type {Array<string>}
          */
-        this.headers = [ "Etag", "Last-Modified", "Content-Length", "Content-Type" ];
+        this.headers = ["Etag", "Last-Modified", "Content-Length", "Content-Type"];
 
         /**
          * The list of resource to monitor
@@ -157,10 +157,10 @@ class Live {
 
         // Initialize the resources info
         uris.forEach(
-            ( async url => {
+            (async url => {
                 const info = await this.getHead(url);
                 this.resources[url] = info;
-            } ).bind(this)
+            }).bind(this)
         )
 
         // Add styles for morphing between old and new css files
@@ -214,7 +214,7 @@ class Live {
                 // TODO: What is this for?
                 this.currentLinkElements[href] = link;
             }
-        } )
+        })
 
         return uris;
     }
@@ -285,6 +285,9 @@ class Live {
      * @returns
      */
     refreshResource(url, resourceType) {
+        if (!resourceType) {
+            resourceType = 'text/html';
+        }
         switch (resourceType.toLowerCase()) {
             // CSS files can be reloaded dynamically by replacing the link element
             case "text/css":

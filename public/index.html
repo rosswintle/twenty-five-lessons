@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>25 Lessons</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/styles.css">
@@ -13,7 +13,7 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Home Page">
+    <meta property="og:title" content="25 Lessons">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
 
@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="">
     <meta property="twitter:url" content="">
-    <meta name="twitter:title" content="Home Page">
+    <meta name="twitter:title" content="25 Lessons">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 </head>
@@ -35,20 +35,90 @@
     </nav>
 </header>
 
-    <main class="container max-w-(--breakpoint-lg) mx-auto px-8 py-8 border border-slate-200">
+    <main class="container max-w-(--breakpoint-md) mx-auto px-8 py-8 border border-slate-200">
         
 
-<h1 class="text-6xl text-center">Hello, World!</h1>
+<h1 class="text-6xl text-center mb-8">25 Lessons!</h1>
 
+<h2 class="text-center text-xl max-w-screen-md mb-8">Select the lessons you want to know more about.<br>At the end of
+    the
+    talk you will be able to copy notes and links about those lessons!</h2>
+
+<div id="lessons-app" x-data="tflessons">
+    <ul id="lessons-grid" class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
+        <template x-for="(lesson, index) in lessons" :key="lesson.id">
+            <li class="lesson-card content-center aspect-square border bg-red-300"
+                :class="{ 'bg-red-300': isSelected(index)}" @click="toggleSelected(index)">
+                <h3 id="lesson-title" x-text="lesson.title" class="font-bold text-4xl text-center">
+                </h3>
+            </li>
+        </template>
+    </ul>
+</div>
+
+<h2 class="mt-4 text-2xl text-center">Sssh, we're only testing!</h2>
 
     </main>
 
     <footer class="w-full px-8 py-4 bg-slate-200">
 </footer>
 
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('tflessons', () => ({
+            lessons: [
+                { id: 1, title: '1', description: 'Description for lesson 1' },
+                { id: 2, title: '2', description: 'Description for lesson 2' },
+                { id: 3, title: '3', description: 'Description for lesson 2' },
+                { id: 4, title: '4', description: 'Description for lesson 2' },
+                { id: 5, title: '5', description: 'Description for lesson 2' },
+                { id: 6, title: '6', description: 'Description for lesson 2' },
+                { id: 7, title: '7', description: 'Description for lesson 2' },
+                { id: 8, title: '8', description: 'Description for lesson 2' },
+                { id: 9, title: '9', description: 'Description for lesson 2' },
+                { id: 10, title: '10', description: 'Description for lesson 2' },
+                { id: 11, title: '11', description: 'Description for lesson 2' },
+                { id: 12, title: '12', description: 'Description for lesson 2' },
+                { id: 13, title: '13', description: 'Description for lesson 2' },
+                { id: 14, title: '14', description: 'Description for lesson 2' },
+                { id: 15, title: '15', description: 'Description for lesson 2' },
+                { id: 16, title: '16', description: 'Description for lesson 2' },
+                { id: 17, title: '17', description: 'Description for lesson 2' },
+                { id: 18, title: '18', description: 'Description for lesson 2' },
+                { id: 19, title: '19', description: 'Description for lesson 2' },
+                { id: 20, title: '20', description: 'Description for lesson 2' },
+                { id: 21, title: '21', description: 'Description for lesson 2' },
+                { id: 22, title: '22', description: 'Description for lesson 2' },
+                { id: 23, title: '23', description: 'Description for lesson 2' },
+                { id: 24, title: '24', description: 'Description for lesson 2' },
+                { id: 25, title: '25', description: 'Description for lesson 2' },
+            ],
+
+            // These will be array indexes starting at 1.
+            selected: new Map(),
+
+            // Index is the array index, not the ID.
+            isSelected(index) {
+                return this.selected.has(index)
+            },
+
+            toggleSelected(index) {
+                console.log(`toggling ${index}`)
+                if (this.selected.has(index)) {
+                    this.selected.delete(index);
+                } else {
+                    this.selected.set(index, true);
+                }
+            }
+        }))
+    })
+</script>
+
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- Live watch script -->
+<script id="live.js" src="/dev-js/live.js"></script>
 </body>
 
 </html>
