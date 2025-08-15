@@ -55,7 +55,11 @@
         </template>
     </ul>
 
-    <button @click="copyResourcesToClipboard()" class="block mx-auto mt-6 border px-4 py-3">Copy resources</button>
+    <button @click="copyResourcesToClipboard()" :disabled="didJustCopy"
+        class="block mx-auto w-40 mt-6 border px-4 py-3 hover:bg-gray-300 active:bg-gray-500 focus:bg-gray-300"
+        x-text="didJustCopy ? 'Copied' : 'Copy resources'">
+
+    </button>
 </div>
 
 
@@ -153,6 +157,8 @@ Description for lesson 25` },
             // These will be array indexes starting at 1.
             selected: Alpine.$persist([]),
 
+            didJustCopy: false,
+
             // Index is the array index, not the ID.
             isSelected(index) {
                 return this.selected.includes(index)
@@ -188,6 +194,8 @@ These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
             copyResourcesToClipboard() {
                 const resourceText = this.compileResources();
                 this.$clipboard(resourceText);
+                this.didJustCopy = true;
+                setTimeout(() => this.didJustCopy = false, 3000);
             }
         }))
     })

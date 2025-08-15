@@ -23,7 +23,11 @@
         </template>
     </ul>
 
-    <button @click="copyResourcesToClipboard()" class="block mx-auto mt-6 border px-4 py-3">Copy resources</button>
+    <button @click="copyResourcesToClipboard()" :disabled="didJustCopy"
+        class="block mx-auto w-40 mt-6 border px-4 py-3 hover:bg-gray-300 active:bg-gray-500 focus:bg-gray-300"
+        x-text="didJustCopy ? 'Copied' : 'Copy resources'">
+
+    </button>
 </div>
 
 
