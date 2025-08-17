@@ -87,7 +87,26 @@ Description for lesson 25` },
             // These will be array indexes starting at 1.
             selected: Alpine.$persist([]),
 
+            showEndTimestamp: Date.now() + 10_000,
+            nowTimestamp: Date.now(),
+
             didJustCopy: false,
+
+            shouldShowCopyNotice: false,
+
+            init() {
+                setInterval(() => {
+                    this.nowTimestamp = Date.now();
+                }, 1000);
+            },
+
+            secondsToShowEnd() {
+                return Math.ceil((this.showEndTimestamp - this.nowTimestamp) / 1000);
+            },
+
+            hasShowEnded() {
+                return this.secondsToShowEnd() < 0;
+            },
 
             // Index is the array index, not the ID.
             isSelected(index) {
@@ -125,6 +144,7 @@ These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
                 const resourceText = this.compileResources();
                 this.$clipboard(resourceText);
                 this.didJustCopy = true;
+                this.shouldShowCopyNotice = true;
                 setTimeout(() => this.didJustCopy = false, 3000);
             }
         }))

@@ -25,18 +25,19 @@
         </template>
     </ul>
 
-    <button @click="copyResourcesToClipboard()" :disabled="didJustCopy"
-        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black"
+    <button @click="copyResourcesToClipboard()" :disabled="didJustCopy || !hasShowEnded()"
+        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black disabled:bg-gray-300 disabled:text-gray-600"
         x-text="didJustCopy ? 'Copied' : 'Copy resources'">
-
     </button>
+
+    <p x-show="! hasShowEnded()" class="font-headline mt-6 text-center">
+        You will be able to copy show notes once the show has ended.
+    </p>
+
+    <p x-show="shouldShowCopyNotice" class="font-headline mt-6 text-center">
+        Markdown notes have been copied to your clipboard.<br>
+        You can paste them into your notes/message/email app.
+    </p>
 </div>
-
-
-
-
-<?php if (ENVIRONMENT === 'DEVELOPMENT') : ?>
-<h2 class="mt-4 text-2xl text-center">Sssh, we're only testing!</h2>
-<?php endif; ?>
 
 <?php endExtend(); ?>
