@@ -6,25 +6,27 @@
 // includePart('../parts/some-part.html', ['param'=> 'value'])
 ?>
 
-<h1 class="text-6xl text-center mb-8">25 Lessons!</h1>
+<h1 class="text-6xl text-center mb-8 font-display">25 Lessons</h1>
 
-<h2 class="text-center text-xl max-w-screen-md mb-8">Select the lessons you want to know more about.<br>At the end of
+<h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select the lessons you want to know more about.<br>At
+    the end of
     the
     talk you will be able to copy notes and links about those lessons!</h2>
 
 <div id="lessons-app" x-data="tflessons">
     <ul id="lessons-grid" class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
         <template x-for="(lesson, index) in lessons" :key="lesson.id">
-            <li class="lesson-card content-center aspect-square border bg-red-300"
-                :class="{ 'bg-red-300': isSelected(index)}" @click="toggleSelected(index)">
-                <h3 id="lesson-title" x-text="lesson.id" class="font-bold text-4xl text-center">
+            <li class="lesson-card content-center aspect-square border border-black"
+                :class="{ 'bg-black': isSelected(index), 'text-white': isSelected(index)}"
+                @click="toggleSelected(index)">
+                <h3 id="lesson-title" x-text="lesson.id" class="font-bold text-4xl text-center font-display">
                 </h3>
             </li>
         </template>
     </ul>
 
     <button @click="copyResourcesToClipboard()" :disabled="didJustCopy"
-        class="block mx-auto w-40 mt-6 border px-4 py-3 hover:bg-gray-300 active:bg-gray-500 focus:bg-gray-300"
+        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black"
         x-text="didJustCopy ? 'Copied' : 'Copy resources'">
 
     </button>

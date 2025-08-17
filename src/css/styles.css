@@ -23,6 +23,43 @@
   }
 }
 
+@theme {
+    --font-display: "loopconfround","monospace";
+    --font-headline: "francoisone","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --font-mono: "Source Code Pro",monospace;
+    --color-lellow: #fff200;
+    --color-calendar: #e00000;
+    --color-terminal: #60ff05;
+}
+
+@font-face {
+  font-family:loopconfround;
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url(/fonts/loopconf-round-webfont.eot),
+  url(/fonts/loopconf-round-webfont.woff2)format("woff2"),
+  url(/fonts/loopconf-round-webfont.woff)format("woff"),
+  url(/fonts/loopconf-round-webfont.ttf)format("truetype")
+}
+
+@font-face {
+  font-family:francoisone;
+  font-style:normal;
+  font-weight:400 700;
+  font-display:swap;
+  src:url(/fonts/FrancoisOne-Regular.ttf)format("truetype")
+}
+
+@font-face {
+  font-family:"Source Code Pro";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url(/fonts/SourceCodePro-VariableFont_wght.ttf)format("truetype")
+}
+
+
 [x-cloak] {
     display: none !important;
 }
