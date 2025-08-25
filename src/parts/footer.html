@@ -40,7 +40,8 @@ Links:
 Links:
 
 * The [The Staff Engineers Path](https://www.oreilly.com/library/view/the-staff-engineers/9781098118723/) is a great resource on levelling up as a developer and talks a lot about communication.
-
+* Read about [The Worst Programmer I Know](https://dannorth.net/blog/the-worst-programmer/): "Tim wasn't delivering software; Tim was delivering a team that was delivering software."
+* There's some great stuff on communication in remote work situations in [this Smashing Magazine article](https://www.smashingmagazine.com/2021/02/improve-team-communication-age-remote-work)
                     ` },
                 {
                     id: 4, title: 'Everyone\'s brain works differently', description: `
@@ -49,6 +50,7 @@ Links:
 * [16 Personalities](https://www.16personalities.com/) is a free and very helpful spin on Myers Briggs.
 * We did [Clifton Strengths](https://www.gallup.com/cliftonstrengths/) at work and found it very helpful - but it may be expensive.
 * Make your own personal README / User Guide at [Manual of Me](https://www.manualof.me/)
+* [Bridging the Gap: Supporting Neurodivergent Colleagues in the Workplace](https://syde.com/supporting-neurodivergent-employees-in-the-workplace/)
 ` },
                 {
                     id: 5, title: 'Diversity really is a strength (and a joy)', description: `
@@ -66,7 +68,9 @@ Links:
 Description for lesson 8` },
                 {
                     id: 9, title: 'Feedback is fuel', description: `
-Description for lesson 9` },
+Links:
+* [Kind.engineering's feedback section](https://kind.engineering/#feedback)
+` },
                 {
                     id: 10, title: 'Don\’t label the obvious', description: `
 Links:
@@ -104,8 +108,23 @@ Description for lesson 19` },
                     id: 20, title: '20', description: `
 Description for lesson 20` },
                 {
-                    id: 21, title: '21', description: `
-Description for lesson 21` },
+                    id: 21, title: 'Write things down to forget them.', description: `
+
+The source quote is: "Writing things down isn't just for remembering things. It's for forgetting them."
+
+But is that right? Well... writing things down can help you remember things:
+
+* [A (very academic) study](https://www.openread.academy/en/paper/reading?corpusId=503252214) into whether taking handwritten notes is better than taking digital notes for memory and recollection.
+* [A (less academic) article from the New Scientist](https://www.newscientist.com/article/2414241-writing-things-down-may-help-you-remember-information-more-than-typing/)
+
+But my point is that holding things in your head is a bad idea.
+
+Links:
+
+* This [Smashing Magazine article](https://www.smashingmagazine.com/2021/02/improve-team-communication-age-remote-work) has some great stuff about documentation and institutional knowledge.
+* "Writing is the process by which you realise that you do not understand what you are talking about" is a quote by Shane Parrish from his article ["Writing to Think"](https://fs.blog/writing-to-think/)
+
+` },
                 {
                     id: 22, title: '22', description: `
 Description for lesson 22` },
@@ -172,6 +191,16 @@ These are your selected resources from Ross's LoopConf 2025 talk. Enjoy!
                     resourceText += `\n\n---\n\n## Lesson ${lesson.id} - ${lesson.title}\n`
                     resourceText += lesson.description;
                 }
+
+                resourceText += `
+Thank you so much for listening and learning together.
+
+Some final links:
+
+* [Matthias Endler on The Best Programmers I Know"](https://endler.dev/2025/best-programmers/)
+* The qualities that make a [1x Engineer](https://1x.engineer/)
+* [Kind.engineering](https://kind.engineering/)
+`;
 
                 return resourceText;
             },
