@@ -7,8 +7,10 @@
 <body class="relative flex flex-col bg-black min-h-screen">
     <?php includePart('../parts/header.html'); ?>
 
-    <main class="grow container max-w-(--breakpoint-md) mx-auto px-8 py-8 bg-lellow">
-        <?= $content ?>
+    <main class="grow bg-lellow w-full">
+        <div id="inner-container" class="max-w-(--breakpoint-md) mx-auto px-8 py-8">
+            <?= $content ?>
+        </div>
     </main>
 
     <?php includePart('../parts/footer.html') ?>
