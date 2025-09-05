@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="min-h-screen">
 
 <?php includePart('../parts/head.html', ['title' => $title]) ?>
 
 
-<body class="bg-lellow">
+<body class="relative bg-black min-h-screen pb-20">
     <?php includePart('../parts/header.html'); ?>
 
-    <main class="container max-w-(--breakpoint-md) mx-auto px-8 py-8">
+    <main class="container max-w-(--breakpoint-md) mx-auto px-8 py-8 bg-lellow">
         <?= $content ?>
     </main>
 
