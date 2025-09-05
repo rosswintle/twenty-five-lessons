@@ -4,10 +4,10 @@
 <?php includePart('../parts/head.html', ['title' => $title]) ?>
 
 
-<body class="relative bg-black min-h-screen pb-20">
+<body class="relative flex flex-col bg-black min-h-screen">
     <?php includePart('../parts/header.html'); ?>
 
-    <main class="container max-w-(--breakpoint-md) mx-auto px-8 py-8 bg-lellow">
+    <main class="grow container max-w-(--breakpoint-md) mx-auto px-8 py-8 bg-lellow">
         <?= $content ?>
     </main>
 

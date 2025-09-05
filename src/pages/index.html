@@ -8,10 +8,7 @@
 
 <h1 class="text-6xl text-center mb-8 font-display">25 Lessons</h1>
 
-<h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select the lessons you want to know more about.<br>At
-    the end of
-    the
-    talk you will be able to copy notes and links about those lessons!</h2>
+<h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select lessons for notes &amp; links.</h2>
 
 <div id="lessons-app" x-data="tflessons">
     <ul id="lessons-grid" class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
@@ -31,7 +28,7 @@
     </button>
 
     <p x-show="! hasShowEnded()" class="font-headline mt-6 text-center">
-        You will be able to copy show notes once the show has ended.
+        You will be able to view and copy notes and links once the talk has ended.
     </p>
 
     <p x-show="shouldShowCopyNotice" class="font-headline mt-6 text-center">
