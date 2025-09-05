@@ -62,7 +62,7 @@
     <template x-if="hasShowEnded()">
         <ul id="lessons-list" class="flex flex-col gap-2 max-w-96 mx-auto">
             <template x-for="(lesson, index) in lessons" :key="lesson.id">
-                <li class="lesson-list-card flex border border-2 border-black px-4 py-2"
+                <li class="lesson-list-card flex border-2 border-black px-4 py-2"
                     :class="{ 'bg-black': isSelected(index), 'text-white': isSelected(index)}"
                     @click="toggleSelected(index)">
                     <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
@@ -89,7 +89,7 @@
         <div id="resources-sections" class="flex flex-col gap-3">
             <template x-for="(lesson, index) in lessons" :key="lesson.id">
                 <template x-if="isSelected(index)">
-                    <section class="lesson-notes-card flex border border-2 border-black px-4 py-2" :class="">
+                    <section class="lesson-notes-card flex border-2 border-black px-4 py-2">
                         <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
                         </h3>
                         <p class="" x-text="lesson.title">
@@ -351,6 +351,8 @@ Some final links:
 
 <!-- Alpine Core -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<script defer src="/js/marked.umd.js"></script>
 
 <!-- Live watch script -->
 </body>
