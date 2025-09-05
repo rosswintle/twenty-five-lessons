@@ -3,7 +3,7 @@
 <?php
 // Page content here
 // To include partials use:
-// includePart('../parts/some-part.html', ['param'=> 'value'])
+// includePart('../parts/some-part.html', ['param'=>'value'])
 ?>
 
 <h1 class="text-6xl text-center mb-8 font-display">25 Lessons</h1>
@@ -11,7 +11,8 @@
 <h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select lessons for notes &amp; links.</h2>
 
 <div id="lessons-app" x-data="tflessons">
-    <ul id="lessons-grid" class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
+    <ul id="lessons-grid" x-show="!hasShowEnded()"
+        class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
         <template x-for="(lesson, index) in lessons" :key="lesson.id">
             <li class="lesson-card content-center aspect-square border border-black"
                 :class="{ 'bg-black': isSelected(index), 'text-white': isSelected(index)}"
@@ -22,14 +23,52 @@
         </template>
     </ul>
 
-    <button @click="copyResourcesToClipboard()" :disabled="didJustCopy || !hasShowEnded()"
-        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black disabled:bg-gray-300 disabled:text-gray-600"
-        x-text="didJustCopy ? 'Copied' : 'Copy resources'">
+    <template x-if="hasShowEnded()">
+        <ul id="lessons-list" class="flex flex-col gap-2 max-w-96 mx-auto">
+            <template x-for="(lesson, index) in lessons" :key="lesson.id">
+                <li class="lesson-list-card flex border border-2 border-black px-4 py-2"
+                    :class="{ 'bg-black': isSelected(index), 'text-white': isSelected(index)}"
+                    @click="toggleSelected(index)">
+                    <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
+                    </h3>
+                    <p class="" x-text="lesson.title">
+                    </p>
+                </li>
+            </template>
+        </ul>
+    </template>
+
+
+    <button @click="showResources()" :disabled="!hasShowEnded()"
+        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black disabled:bg-gray-300 disabled:text-gray-600">
+        View resources
     </button>
 
     <p x-show="! hasShowEnded()" class="font-headline mt-6 text-center">
         You will be able to view and copy notes and links once the talk has ended.
     </p>
+
+    <div id="resources" x-show="showingNotes" class="mt-6">
+        <h2 class="text-2xl font-bold text-center mb-6">Your notes and links</h2>
+        <div id="resources-sections" class="flex flex-col gap-3">
+            <template x-for="(lesson, index) in lessons" :key="lesson.id">
+                <template x-if="isSelected(index)">
+                    <section class="lesson-notes-card flex border border-2 border-black px-4 py-2" :class="">
+                        <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
+                        </h3>
+                        <p class="" x-text="lesson.title">
+                        </p>
+                    </section>
+                </template>
+            </template>
+        </div>
+    </div>
+
+    <button @click="copyResourcesToClipboard()" x-show="showingNotes"
+        class="block mx-auto w-48 mt-6 bg-black  text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black disabled:bg-gray-300 disabled:text-gray-600"
+        x-text="didJustCopy ? 'Copied' : 'Copy resources'">
+    </button>
+
 
     <p x-show="shouldShowCopyNotice" class="font-headline mt-6 text-center">
         Markdown notes have been copied to your clipboard.<br>

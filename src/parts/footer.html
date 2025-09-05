@@ -143,14 +143,20 @@ Description for lesson 25` },
             // These will be array indexes starting at 1.
             selected: Alpine.$persist([]),
 
-            showEndTimestamp: Date.now() + 10_000,
+            // showEndTimestamp: Date.now() + 10_000,
+            showEndTimestamp: Date.now() + 1_000,
             nowTimestamp: Date.now(),
 
             didJustCopy: false,
 
+            showingNotes: false,
             shouldShowCopyNotice: false,
 
             init() {
+                console.warn('💥 🚨 ⚠️ OK, OK. You\'re a room full of developers. Someone was bound to try it. ⚠️ 🚨 💥');
+                console.log('You CAN hack this and view things before the end of the talk.');
+                console.log('But that would really spoil things. So please don\'t.');
+                console.log('🙌 Thank you! 🙏');
                 setInterval(() => {
                     this.nowTimestamp = Date.now();
                 }, 1000);
@@ -175,6 +181,10 @@ Description for lesson 25` },
                 } else {
                     this.selected.push(index);
                 }
+            },
+
+            showResources() {
+                this.showingNotes = true;
             },
 
             compileResources() {
