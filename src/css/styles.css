@@ -32,6 +32,10 @@
     --color-terminal: #60ff05;
 }
 
+@utility prose {
+    --tw-prose-bullets: #000000;
+}
+
 @font-face {
   font-family:loopconfround;
   font-style:normal;

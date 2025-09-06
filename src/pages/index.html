@@ -29,7 +29,8 @@
                 <li class="lesson-list-card flex border-2 border-black px-4 py-2"
                     :class="{ 'bg-black': isSelected(index), 'text-white': isSelected(index)}"
                     @click="toggleSelected(index)">
-                    <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
+                    <h3 id="lesson-title" x-text="lesson.id + '.'"
+                        class="w-16 flex-none font-bold text-4xl font-display">
                     </h3>
                     <p class="" x-text="lesson.title">
                     </p>
@@ -48,16 +49,20 @@
         You will be able to view and copy notes and links once the talk has ended.
     </p>
 
-    <div id="resources" x-show="showingNotes" class="mt-6">
-        <h2 class="text-2xl font-bold text-center mb-6">Your notes and links</h2>
+    <div id="resources" x-show="showingNotes" class="mt-12">
+        <h2 class="text-3xl font-bold text-center mb-6">Your notes and links</h2>
         <div id="resources-sections" class="flex flex-col gap-3">
             <template x-for="(lesson, index) in lessons" :key="lesson.id">
                 <template x-if="isSelected(index)">
                     <section class="lesson-notes-card flex border-2 border-black px-4 py-2">
-                        <h3 id="lesson-title" x-text="lesson.id + '.'" class="w-16 font-bold text-4xl font-display">
-                        </h3>
-                        <p class="" x-text="lesson.title">
-                        </p>
+                        <span id="lesson-title" x-text="lesson.id + '.'"
+                            class="w-16 flex-none font-bold text-4xl font-display">
+                        </span>
+                        <div>
+                            <h3 class="font-bold text-xl mb-4" x-text="lesson.title">
+                            </h3>
+                            <div class="lesson-description prose" x-html="marked.parse(lesson.description)"></div>
+                        </div>
                     </section>
                 </template>
             </template>
