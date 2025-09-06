@@ -11,6 +11,14 @@
 <h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select lessons for notes &amp; links.</h2>
 
 <div id="lessons-app" x-data="tflessons">
+
+    <template x-if="!hasShowStarted()">
+        <p class="mb-4 text-center">
+            DEBUG: <button @click="debugStartTalk()">Start talk</button> | <button @click="debugEndTalk()">End
+                talk</button>
+        </p>
+    </template>
+
     <ul id="lessons-grid" x-show="!hasShowEnded()"
         class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
         <template x-for="(lesson, index) in lessons" :key="lesson.id">

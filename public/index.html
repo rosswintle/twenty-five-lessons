@@ -47,6 +47,14 @@
 <h2 class="text-center text-xl max-w-screen-md mb-8 font-headline">Select lessons for notes &amp; links.</h2>
 
 <div id="lessons-app" x-data="tflessons">
+
+    <template x-if="!hasShowStarted()">
+        <p class="mb-4 text-center">
+            DEBUG: <button @click="debugStartTalk()">Start talk</button> | <button @click="debugEndTalk()">End
+                talk</button>
+        </p>
+    </template>
+
     <ul id="lessons-grid" x-show="!hasShowEnded()"
         class="grid grid-cols-5 grid-rows-5 gap-1 justify-center items-center max-w-96 mx-auto">
         <template x-for="(lesson, index) in lessons" :key="lesson.id">
@@ -265,8 +273,9 @@ Description for lesson 25` },
             // These will be array indexes starting at 1.
             selected: Alpine.$persist([]),
 
-            // showEndTimestamp: Date.now() + 10_000,
-            showEndTimestamp: Date.now() + 1_000,
+            showStartTimestamp: 1758796200_000,
+            showEndTimestamp: 1758796200_000 + (30 * 60 * 1000),
+            // showEndTimestamp: Date.now() + 1_000,
             nowTimestamp: Date.now(),
 
             didJustCopy: false,
@@ -279,6 +288,11 @@ Description for lesson 25` },
                 console.log('You CAN hack this and view things before the end of the talk.');
                 console.log('But that would really spoil things. So please don\'t.');
                 console.log('🙌 Thank you! 🙏');
+                // console.log('Talk starts at ', new Date(this.showStartTimestamp));
+                // console.log('Talk ends at ', new Date(this.showEndTimestamp));
+                // console.log('Seconds to show start: ', this.secondsToShowStart());
+                // console.log('Seconds to show end: ', this.secondsToShowEnd());
+
                 setInterval(() => {
                     this.nowTimestamp = Date.now();
                 }, 1000);
@@ -288,8 +302,24 @@ Description for lesson 25` },
                 return Math.ceil((this.showEndTimestamp - this.nowTimestamp) / 1000);
             },
 
+            secondsToShowStart() {
+                return Math.ceil((this.showStartTimestamp - this.nowTimestamp) / 1000);
+            },
+
             hasShowEnded() {
                 return this.secondsToShowEnd() < 0;
+            },
+
+            hasShowStarted() {
+                return this.secondsToShowStart() < 0;
+            },
+
+            debugStartTalk() {
+                this.showStartTimestamp = Date.now() - 1000;
+            },
+
+            debugEndTalk() {
+                this.showEndTimestamp = Date.now() - 1000;
             },
 
             // Index is the array index, not the ID.
