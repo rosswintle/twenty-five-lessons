@@ -152,7 +152,12 @@ Description for lesson 25` },
             didJustCopy: false,
 
             showingNotes: false,
+            showingFeedback: false,
             shouldShowCopyNotice: false,
+
+            feedbackText: Alpine.$persist(''),
+            feedbackName: Alpine.$persist(''),
+            isFeedbackSubmitting: false,
 
             init() {
                 console.warn('💥 🚨 ⚠️ OK, OK. You\'re a room full of developers. Someone was bound to try it. ⚠️ 🚨 💥');
@@ -207,7 +212,13 @@ Description for lesson 25` },
             },
 
             showResources() {
+                this.showingFeedback = false;
                 this.showingNotes = true;
+            },
+
+            showFeedback() {
+                this.showingFeedback = true;
+                this.showingNotes = false;
             },
 
             compileResources() {
@@ -245,6 +256,23 @@ Some final links:
                 this.didJustCopy = true;
                 this.shouldShowCopyNotice = true;
                 setTimeout(() => this.didJustCopy = false, 3000);
+            },
+
+            async submitFeedback() {
+                this.isFeedbackSubmitting = true;
+                result = await fetch('https://ntfy.sh/LoopConfTwentyFive', {
+                    method: 'POST',
+                    body: `From: ${this.feedbackName}\n\nMessage:\n${this.feedbackText}`
+                });
+
+                if (result.status === 200) {
+                    alert('Sent! Thanks so much.');
+                    this.isFeedbackSubmitting = false;
+                    this.feedbackText = '';
+                    return;
+                }
+                alert(`Error. HTTP Status was ${result.status}`);
+                console.log(result);
             }
         }))
     })
