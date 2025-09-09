@@ -259,6 +259,11 @@ Some final links:
             },
 
             async submitFeedback() {
+                if (this.feedbackText.match(/<script/i)) {
+                    alert('Nice try, fellow developer!')
+                    return;
+                }
+
                 this.isFeedbackSubmitting = true;
                 result = await fetch('https://ntfy.sh/LoopConfTwentyFive', {
                     method: 'POST',
