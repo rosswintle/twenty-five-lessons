@@ -132,7 +132,8 @@
                 class="bg-white rounded-xl overflow-hidden w-full mb-8 mt-0 border-none shadow-xl" />
             <button
                 class="block w-48 mt-6 mx-auto bg-black text-center text-white px-4 py-3 font-headline font-bold text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded transition duration-300 hover:bg-white hover:text-black disabled:bg-gray-300 disabled:text-gray-600"
-                x-text="isFeedbackSubmitting ? 'Sending' : 'Send feedback'" :disabled="isFeedbackSubmitting">
+                x-text="isFeedbackSubmitting ? 'Sending' : 'Send feedback'"
+                :disabled="isFeedbackSubmitting || feedbackText.length < 3">
             </button>
         </form>
     </div>
